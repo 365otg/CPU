@@ -49,6 +49,33 @@
             Charles Paris Music Apps & Utilities
         </p>
 
+        <!-- World Clock Section -->
+        <div class="w-full max-w-2xl mx-auto mb-8 p-4 bg-white bg-opacity-10 rounded-2xl shadow-xl border border-white border-opacity-20 backdrop-blur-sm">
+            <h2 class="text-2xl font-bold mb-4 text-center text-red-300">World Clock</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div class="p-2">
+                    <p class="text-lg font-semibold">Philadelphia</p>
+                    <p id="time-philadelphia" class="text-xl font-bold text-red-200"></p>
+                    <p id="date-philadelphia" class="text-sm opacity-70"></p>
+                </div>
+                <div class="p-2">
+                    <p class="text-lg font-semibold">Paris</p>
+                    <p id="time-paris" class="text-xl font-bold text-red-200"></p>
+                    <p id="date-paris" class="text-sm opacity-70"></p>
+                </div>
+                <div class="p-2">
+                    <p class="text-lg font-semibold">Tokyo</p>
+                    <p id="time-tokyo" class="text-xl font-bold text-red-200"></p>
+                    <p id="date-tokyo" class="text-sm opacity-70"></p>
+                </div>
+                <div class="p-2">
+                    <p class="text-lg font-semibold">Chicago</p>
+                    <p id="time-chicago" class="text-xl font-bold text-red-200"></p>
+                    <p id="date-chicago" class="text-sm opacity-70"></p>
+                </div>
+            </div>
+        </div>
+
         <!-- Add App Button - REMOVED -->
         <!-- The "Add New App" button was removed as per your request -->
     </header>
@@ -105,6 +132,15 @@
         <!-- App cards will be rendered here by JavaScript -->
     </main>
 
+    <!-- App Descriptions Section -->
+    <section class="w-full max-w-4xl mt-8 p-6 bg-white bg-opacity-10 rounded-3xl shadow-2xl border border-white border-opacity-10 backdrop-blur-sm">
+        <p class="text-lg text-center opacity-80 mb-4">Charles Paris</p>
+        <h2 class="text-3xl font-bold mb-6 text-center text-red-300 drop-shadow-lg">App Descriptions</h2>
+        <ul id="app-descriptions-list" class="space-y-4">
+            <!-- App descriptions will be rendered here by JavaScript -->
+        </ul>
+    </section>
+
     <!-- Footer -->
     <footer class="w-full max-w-4xl mt-8 text-center text-white opacity-70 text-sm flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-4">
         <p>&copy; 2025 Charles Paris Utilities. All rights reserved.</p>
@@ -120,7 +156,7 @@
         // Define a list of available icons from lucide-react for selection
         // These correspond to the data-lucide attributes
         const availableIcons = [
-            'Search', 'PlusCircle', 'Settings', 'Home', 'Github', 'Linkedin', 'Twitter', 'Mail', 'Code', 'BarChart2', 'Book', 'Camera', 'Cloud', 'Database', 'Globe', 'Heart', 'Key', 'Lightbulb', 'MapPin', 'MessageSquare', 'Monitor', 'Music', 'Package', 'PenTool', 'PieChart', 'Play', 'Printer', 'ShoppingBag', 'Star', 'Sun', 'Tag', 'Terminal', 'TrendingUp', 'Upload', 'User', 'Video', 'Wifi', 'Zap', 'DollarSign' // Added DollarSign for the donate link
+            'Search', 'PlusCircle', 'Settings', 'Home', 'Github', 'Linkedin', 'Twitter', 'Mail', 'Code', 'BarChart2', 'Book', 'Camera', 'Cloud', 'Database', 'Globe', 'Heart', 'Key', 'Lightbulb', 'MapPin', 'MessageSquare', 'Monitor', 'Music', 'Package', 'PenTool', 'PieChart', 'Play', 'Printer', 'ShoppingBag', 'Star', 'Sun', 'Tag', 'Terminal', 'TrendingUp', 'Upload', 'User', 'Video', 'Wifi', 'Zap', 'DollarSign', 'Tool'
         ];
 
         // Global array to store applications
@@ -128,12 +164,12 @@
 
         // DOM elements
         const appsGrid = document.getElementById('apps-grid');
-        // const addAppButton = document.getElementById('add-app-button'); // REMOVED
         const addAppFormDiv = document.getElementById('add-app-form');
         const appForm = document.getElementById('app-form');
         const appNameInput = document.getElementById('appName');
         const appUrlInput = document.getElementById('appUrl');
         const appIconSelect = document.getElementById('appIcon');
+        const appDescriptionsList = document.getElementById('app-descriptions-list'); // New DOM element for descriptions
 
         // Helper function to get a random icon name for new apps
         const getRandomIconName = () => {
@@ -148,14 +184,21 @@
             } else {
                 // Default apps - now only includes the explicitly added ones
                 apps = [
-                    { id: 13, name: 'Akai MPC Guide', url: 'https://365otg.github.io/AkaiMPCGuide/', icon: 'Book' },
-                    { id: 14, name: 'Yamaha SeqTrak Guide', url: 'https://365otg.github.io/seqtrak/', icon: 'Music' },
-                    { id: 15, name: 'Drum App', url: 'https://365otg.github.io/drumapp/', icon: 'Play' },
-                    { id: 16, name: 'Producer Tutorials', url: 'https://365otg.github.io/producertutorials/', icon: 'Video' },
-                    { id: 17, name: 'SP-404 MK2 Guide', url: 'https://365otg.github.io/sp404-mk2-guide/', icon: 'Book' },
-                    { id: 18, name: 'Akai Force App', url: 'https://365otg.github.io/akaiforceapp/', icon: 'Monitor' },
-                    { id: 19, name: 'Roland Verselab MV-1', url: 'https://365otg.github.io/RolandVerselabMV1/', icon: 'Music' },
-                    { id: 20, name: 'Aetherflow App', url: 'https://365otg.github.io/aetherflow-app/', icon: 'Cloud' },
+                    { id: 13, name: 'Akai MPC Guide', url: 'https://365otg.github.io/AkaiMPCGuide/', icon: 'Book', description: 'A comprehensive guide for Akai MPC users.' },
+                    { id: 14, name: 'Yamaha SeqTrak Guide', url: 'https://365otg.github.io/seqtrak/', icon: 'Music', description: 'Explore the features and workflow of the Yamaha SeqTrak.' },
+                    { id: 15, name: 'Drum App', url: 'https://365otg.github.io/drumapp/', icon: 'Play', description: 'A simple, interactive drum machine for creating beats.' },
+                    { id: 16, name: 'Producer Tutorials', url: 'https://365otg.github.io/producertutorials/', icon: 'Video', description: 'Video tutorials for music producers on various topics.' },
+                    { id: 17, name: 'SP-404 MK2 Guide', url: 'https://365otg.github.io/sp404-mk2-guide/', icon: 'Book', description: 'An in-depth guide for the Roland SP-404 MK2 sampler.' },
+                    { id: 18, name: 'Akai Force App', url: 'https://365otg.github.io/akaiforceapp/', icon: 'Monitor', description: 'Resources and tips for users of the Akai Force production system.' },
+                    { id: 19, name: 'Roland Verselab MV-1', url: 'https://365otg.github.io/RolandVerselabMV1/', icon: 'Music', description: 'A guide to getting the most out of your Roland Verselab MV-1.' },
+                    { id: 20, name: 'Aetherflow App', url: 'https://365otg.github.io/aetherflow-app/', icon: 'Cloud', description: 'A utility for managing and exploring cloud-based resources.' },
+                    { id: 21, name: 'Quote Maker', url: 'https://365otg.github.io/OTGQuotes/', icon: 'Tool', description: 'Create and customize inspiring quotes with this handy tool.' },
+                    { id: 22, name: 'Producer Tools', url: 'https://365otg.github.io/ProducerTools/', icon: 'Package', description: 'A collection of essential tools and resources for music producers.' },
+                    { id: 23, name: 'CPU Knife', url: 'https://365otg.github.io/CPUKnife/', icon: 'Settings', description: 'A utility for optimizing CPU performance and managing processes.' },
+                    { id: 24, name: 'Metronome', url: '#', icon: 'Play', description: 'A simple and accurate metronome to keep your timing perfect.' },
+                    { id: 25, name: 'Chord Explorer', url: '#', icon: 'Music', description: 'Discover and visualize various chords and scales.' },
+                    { id: 26, name: 'Sample Organizer', url: '#', icon: 'Package', description: 'Keep your audio samples neatly categorized and easily accessible.' },
+                    { id: 27, name: 'DAW Shortcuts Guide', url: '#', icon: 'Terminal', description: 'Quick reference for keyboard shortcuts in popular Digital Audio Workstations.' },
                 ];
             }
         };
@@ -168,6 +211,7 @@
         // Function to render app cards
         const renderApps = () => {
             appsGrid.innerHTML = ''; // Clear existing apps
+            appDescriptionsList.innerHTML = ''; // Clear existing descriptions
 
             const appsToRender = apps;
 
@@ -177,11 +221,15 @@
                         <p class="text-xl">No apps found.</p>
                     </div>
                 `;
+                appDescriptionsList.innerHTML = `
+                    <li class="text-center text-white opacity-70">No app descriptions available.</li>
+                `;
                 lucide.createIcons();
                 return;
             }
 
             appsToRender.forEach(app => {
+                // Render app card
                 const appCard = document.createElement('div');
                 appCard.className = 'relative flex flex-col items-center justify-center p-4 bg-white bg-opacity-10 rounded-2xl shadow-lg hover:shadow-xl transform transition-all duration-300 ease-in-out hover:scale-105 cursor-pointer group';
                 appCard.setAttribute('data-app-id', app.id); // Store app ID for deletion
@@ -212,6 +260,20 @@
                 });
 
                 appsGrid.appendChild(appCard);
+
+                // Render app description
+                const descriptionItem = document.createElement('li');
+                descriptionItem.className = 'bg-white bg-opacity-5 p-4 rounded-lg border border-white border-opacity-10 shadow-md flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4';
+                descriptionItem.innerHTML = `
+                    <div class="flex-shrink-0 text-red-300 text-3xl">
+                        <span data-lucide="${app.icon}" size="32"></span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-red-200">Charles Paris ${app.name}</h3>
+                        <p class="text-sm opacity-80">${app.description || 'No description available.'}</p>
+                    </div>
+                `;
+                appDescriptionsList.appendChild(descriptionItem);
             });
 
             // After rendering, ensure Lucide icons are created for the newly added elements
@@ -233,6 +295,9 @@
             const newAppName = appNameInput.value.trim();
             const newAppUrl = appUrlInput.value.trim();
             const newAppIcon = appIconSelect.value;
+            // For now, new apps added via this hidden form will have a generic description.
+            // If you re-enable the form, you might want to add a description input field.
+            const newAppDescription = 'A new application added to your hub.';
 
             if (newAppName && newAppUrl) {
                 const newApp = {
@@ -240,6 +305,7 @@
                     name: newAppName,
                     url: newAppUrl,
                     icon: newAppIcon,
+                    description: newAppDescription,
                 };
                 apps.push(newApp);
                 saveApps();
@@ -247,8 +313,6 @@
                 appNameInput.value = '';
                 appUrlInput.value = '';
                 appIconSelect.value = getRandomIconName(); // Reset icon to a new random one
-                // addAppFormDiv.classList.add('hidden'); // This form will now always be hidden
-                // addAppFormDiv.classList.remove('animate-fade-in-scale');
             }
         };
 
@@ -272,11 +336,82 @@
             appIconSelect.value = getRandomIconName(); // Set initial random icon
         };
 
+        // --- World Clock Functions ---
+        const updateWorldClock = () => {
+            const now = new Date();
+
+            // Philadelphia (Eastern Time, EDT/EST)
+            document.getElementById('time-philadelphia').textContent = now.toLocaleTimeString('en-US', {
+                timeZone: 'America/New_York',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            });
+            document.getElementById('date-philadelphia').textContent = now.toLocaleDateString('en-US', {
+                timeZone: 'America/New_York',
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            });
+
+
+            // Paris (Central European Time, CEST/CET)
+            document.getElementById('time-paris').textContent = now.toLocaleTimeString('en-US', {
+                timeZone: 'Europe/Paris',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+            document.getElementById('date-paris').textContent = now.toLocaleDateString('en-US', {
+                timeZone: 'Europe/Paris',
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            });
+
+            // Tokyo (Japan Standard Time, JST)
+            document.getElementById('time-tokyo').textContent = now.toLocaleTimeString('en-US', {
+                timeZone: 'Asia/Tokyo',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: false
+            });
+            document.getElementById('date-tokyo').textContent = now.toLocaleDateString('en-US', {
+                timeZone: 'Asia/Tokyo',
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            });
+
+            // Chicago (Central Time, CDT/CST)
+            document.getElementById('time-chicago').textContent = now.toLocaleTimeString('en-US', {
+                timeZone: 'America/Chicago',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            });
+            document.getElementById('date-chicago').textContent = now.toLocaleDateString('en-US', {
+                timeZone: 'America/Chicago',
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            });
+        };
+
+
         // Event Listeners
         document.addEventListener('DOMContentLoaded', () => {
             loadApps();
-            populateIconSelect(); // Still populate, just in case the form is used internally or re-added later
-            renderApps(); // Initial render of all apps
+            populateIconSelect();
+            renderApps(); // Initial render of all apps and descriptions
 
             // Attach event listener to the grid for delegated delete button clicks
             appsGrid.addEventListener('click', (e) => {
@@ -288,13 +423,16 @@
                 }
             });
 
-            // The form itself is now always hidden, but the submit handler remains if you were to unhide it via other means
             appForm.addEventListener('submit', handleAddApp);
 
             // Initialize Lucide icons for static elements after DOM is loaded
             lucide.createIcons();
+
+            // Initialize and update world clock
+            updateWorldClock();
+            setInterval(updateWorldClock, 1000); // Update every second
         });
-        console.log("Script loaded successfully."); // Added for debugging
+        console.log("Script loaded successfully.");
     </script>
 </body>
 </html>
