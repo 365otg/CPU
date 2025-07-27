@@ -1,11 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Charles Paris Utilities</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Keyframe for fade-in-scale animation */
+        @keyframes fade-in-scale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .animate-fade-in-scale {
+            animation: fade-in-scale 0.5s ease-out forwards;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-black text-white font-inter p-4 sm:p-8 flex flex-col items-center overflow-y-auto">
+
+    <!-- Header Section -->
+    <header class="w-full max-w-4xl mb-8 text-center">
+        <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 drop-shadow-lg">
+            Charles Paris Utilities
+        </h1>
+        <p class="text-lg sm:text-xl opacity-80 mb-6">
+            Charles Paris Music Apps & Utilities
+        </p>
+
+        <!-- Add App Button - REMOVED -->
+        <!-- The "Add New App" button was removed as per your request -->
+    </header>
+
+    <!-- Add App Form - This form will now always be hidden as there's no button to trigger it -->
+    <div id="add-app-form" class="w-full max-w-md bg-white bg-opacity-10 rounded-xl p-6 mb-8 shadow-xl border border-white border-opacity-20 transform transition-all duration-500 ease-in-out scale-95 opacity-0 hidden">
+        <h2 class="text-2xl font-bold mb-4 text-center">Add New Application</h2>
+        <form id="app-form">
+            <div class="mb-4">
+                <label for="appName" class="block text-sm font-medium mb-2 opacity-90">App Name</label>
+                <input
+                    type="text"
+                    id="appName"
+                    class="w-full p-3 rounded-lg bg-white bg-opacity-15 border border-white border-opacity-20 focus:outline-none focus:ring-2 focus:ring-red-400 text-white placeholder-white placeholder-opacity-70"
+                    placeholder="e.g., My Project Dashboard"
+                    required
+                />
+            </div>
+            <div class="mb-4">
+                <label for="appUrl" class="block text-sm font-medium mb-2 opacity-90">App URL</label>
+                <input
+                    type="url"
+                    id="appUrl"
+                    class="w-full p-3 rounded-lg bg-white bg-opacity-15 border border-white border-opacity-20 focus:outline-none focus:ring-2 focus:ring-red-400 text-white placeholder-white placeholder-opacity-70"
+                    placeholder="e.g., https://my-dashboard.com"
+                    required
+                />
+            </div>
+            <div class="mb-6">
+                <label for="appIcon" class="block text-sm font-medium mb-2 opacity-90">App Icon</label>
+                <div class="relative">
+                    <select
+                        id="appIcon"
+                        class="w-full p-3 rounded-lg bg-white bg-opacity-15 border border-white border-opacity-20 focus:outline-none focus:ring-2 focus:ring-red-400 text-white appearance-none pr-8"
+                    >
+                        <!-- Icons will be populated by JavaScript -->
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 6.757 7.586 5.343 9l4.95 4.95z"/></svg>
+                    </div>
+                </div>
+            </div>
+            <button
+                type="submit"
+                class="w-full py-3 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-700 hover:to-red-900 text-white font-semibold rounded-lg shadow-md transform transition-all duration-300 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:ring-offset-black"
+            >
+                Add App
+            </button>
+        </form>
+    </div>
+
+    <!-- Apps Grid -->
+    <main id="apps-grid" class="w-full max-w-4xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 p-4 bg-white bg-opacity-5 rounded-3xl shadow-2xl border border-white border-opacity-10 backdrop-blur-sm">
+        <!-- App cards will be rendered here by JavaScript -->
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full max-w-4xl mt-8 text-center text-white opacity-70 text-sm flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-4">
+        <p>&copy; 2025 Charles Paris Utilities. All rights reserved.</p>
+        <a href="https://paypal.me/overtimegrind" target="_blank" rel="noopener noreferrer" class="text-red-300 hover:text-red-100 transition-colors duration-300 flex items-center">
+            <span class="mr-1" data-lucide="dollar-sign" size="16"></span> Donate $10
+        </a>
+        <a href="https://365otg.github.io/365CP/" target="_blank" rel="noopener noreferrer" class="text-red-300 hover:text-red-100 transition-colors duration-300 flex items-center">
+            <span class="mr-1" data-lucide="globe" size="16"></span> My Website
+        </a>
+    </footer>
+
+    <script>
+        // Define a list of available icons from lucide-react for selection
+        // These correspond to the data-lucide attributes
+        const availableIcons = [
+            'Search', 'PlusCircle', 'Settings', 'Home', 'Github', 'Linkedin', 'Twitter', 'Mail', 'Code', 'BarChart2', 'Book', 'Camera', 'Cloud', 'Database', 'Globe', 'Heart', 'Key', 'Lightbulb', 'MapPin', 'MessageSquare', 'Monitor', 'Music', 'Package', 'PenTool', 'PieChart', 'Play', 'Printer', 'ShoppingBag', 'Star', 'Sun', 'Tag', 'Terminal', 'TrendingUp', 'Upload', 'User', 'Video', 'Wifi', 'Zap', 'DollarSign' // Added DollarSign for the donate link
+        ];
+
+        // Global array to store applications
+        let apps = [];
+
+        // DOM elements
+        const appsGrid = document.getElementById('apps-grid');
+        // const addAppButton = document.getElementById('add-app-button'); // REMOVED
+        const addAppFormDiv = document.getElementById('add-app-form');
+        const appForm = document.getElementById('app-form');
+        const appNameInput = document.getElementById('appName');
+        const appUrlInput = document.getElementById('appUrl');
+        const appIconSelect = document.getElementById('appIcon');
+
+        // Helper function to get a random icon name for new apps
+        const getRandomIconName = () => {
+            return availableIcons[Math.floor(Math.random() * availableIcons.length)];
+        };
+
+        // Function to load apps from localStorage
+        const loadApps = () => {
+            const savedApps = localStorage.getItem('myApps');
+            if (savedApps) {
+                apps = JSON.parse(savedApps);
+            } else {
+                // Default apps - now only includes the explicitly added ones
+                apps = [
+                    { id: 13, name: 'Akai MPC Guide', url: 'https://365otg.github.io/AkaiMPCGuide/', icon: 'Book' },
+                    { id: 14, name: 'Yamaha SeqTrak Guide', url: 'https://365otg.github.io/seqtrak/', icon: 'Music' },
+                    { id: 15, name: 'Drum App', url: 'https://365otg.github.io/drumapp/', icon: 'Play' },
+                    { id: 16, name: 'Producer Tutorials', url: 'https://365otg.github.io/producertutorials/', icon: 'Video' },
+                    { id: 17, name: 'SP-404 MK2 Guide', url: 'https://365otg.github.io/sp404-mk2-guide/', icon: 'Book' },
+                    { id: 18, name: 'Akai Force App', url: 'https://365otg.github.io/akaiforceapp/', icon: 'Monitor' },
+                    { id: 19, name: 'Roland Verselab MV-1', url: 'https://365otg.github.io/RolandVerselabMV1/', icon: 'Music' },
+                    { id: 20, name: 'Aetherflow App', url: 'https://365otg.github.io/aetherflow-app/', icon: 'Cloud' },
+                ];
+            }
+        };
+
+        // Function to save apps to localStorage
+        const saveApps = () => {
+            localStorage.setItem('myApps', JSON.stringify(apps));
+        };
+
+        // Function to render app cards
+        const renderApps = () => {
+            appsGrid.innerHTML = ''; // Clear existing apps
+
+            const appsToRender = apps;
+
+            if (appsToRender.length === 0) {
+                appsGrid.innerHTML = `
+                    <div class="col-span-full text-center py-12 text-white opacity-70">
+                        <p class="text-xl">No apps found.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            appsToRender.forEach(app => {
+                const appCard = document.createElement('div');
+                appCard.className = 'relative flex flex-col items-center justify-center p-4 bg-white bg-opacity-10 rounded-2xl shadow-lg hover:shadow-xl transform transition-all duration-300 ease-in-out hover:scale-105 cursor-pointer group';
+                appCard.setAttribute('data-app-id', app.id); // Store app ID for deletion
+
+                appCard.innerHTML = `
+                    <!-- Delete Button -->
+                    <button
+                        class="delete-app-button absolute top-2 right-2 p-1 bg-red-600 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-400"
+                        aria-label="Delete ${app.name}"
+                        data-app-id="${app.id}"
+                    >
+                        <span data-lucide="plus-circle" size="16" class="rotate-45"></span>
+                    </button>
+                    <div class="text-5xl mb-3 text-red-300 group-hover:text-red-200 transition-colors duration-300">
+                        <span data-lucide="${app.icon}" size="48"></span>
+                    </div>
+                    <span class="text-sm font-medium text-center opacity-90 group-hover:opacity-100 transition-opacity duration-300">
+                        ${app.name}
+                    </span>
+                `;
+
+                // Add event listener for opening app
+                appCard.addEventListener('click', (e) => {
+                    // Prevent opening app if delete button was clicked
+                    if (!e.target.closest('.delete-app-button')) {
+                        openApp(app.url);
+                    }
+                });
+
+                appsGrid.appendChild(appCard);
+            });
+
+            // After rendering, ensure Lucide icons are created for the newly added elements
+            lucide.createIcons();
+        };
+
+        // Function to open app URL
+        const openApp = (url) => {
+            if (url === '#') {
+                console.log('This is a placeholder app. No URL configured.');
+            } else {
+                window.open(url, '_blank');
+            }
+        };
+
+        // Function to handle adding a new app (this functionality is now internal/not exposed via UI)
+        const handleAddApp = (e) => {
+            e.preventDefault();
+            const newAppName = appNameInput.value.trim();
+            const newAppUrl = appUrlInput.value.trim();
+            const newAppIcon = appIconSelect.value;
+
+            if (newAppName && newAppUrl) {
+                const newApp = {
+                    id: apps.length > 0 ? Math.max(...apps.map(app => app.id)) + 1 : 1,
+                    name: newAppName,
+                    url: newAppUrl,
+                    icon: newAppIcon,
+                };
+                apps.push(newApp);
+                saveApps();
+                renderApps(); // Re-render all apps
+                appNameInput.value = '';
+                appUrlInput.value = '';
+                appIconSelect.value = getRandomIconName(); // Reset icon to a new random one
+                // addAppFormDiv.classList.add('hidden'); // This form will now always be hidden
+                // addAppFormDiv.classList.remove('animate-fade-in-scale');
+            }
+        };
+
+        // Function to handle deleting an app
+        const handleDeleteApp = (id) => {
+            apps = apps.filter(app => app.id !== id);
+            saveApps();
+            renderApps(); // Re-render all apps
+        };
+
+        // Populate icon select dropdown (still needed if the form were to be re-introduced or used internally)
+        const populateIconSelect = () => {
+            appIconSelect.innerHTML = ''; // Clear existing options
+            availableIcons.forEach(iconName => {
+                const option = document.createElement('option');
+                option.value = iconName;
+                option.textContent = iconName;
+                option.className = 'bg-gray-800 text-white'; // Tailwind classes for options
+                appIconSelect.appendChild(option);
+            });
+            appIconSelect.value = getRandomIconName(); // Set initial random icon
+        };
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            loadApps();
+            populateIconSelect(); // Still populate, just in case the form is used internally or re-added later
+            renderApps(); // Initial render of all apps
+
+            // Attach event listener to the grid for delegated delete button clicks
+            appsGrid.addEventListener('click', (e) => {
+                const deleteButton = e.target.closest('.delete-app-button');
+                if (deleteButton) {
+                    e.stopPropagation(); // Prevent card click event from firing
+                    const appId = parseInt(deleteButton.dataset.appId);
+                    handleDeleteApp(appId);
+                }
+            });
+
+            // The form itself is now always hidden, but the submit handler remains if you were to unhide it via other means
+            appForm.addEventListener('submit', handleAddApp);
+
+            // Initialize Lucide icons for static elements after DOM is loaded
+            lucide.createIcons();
+        });
+        console.log("Script loaded successfully."); // Added for debugging
+    </script>
+</body>
 </html>
