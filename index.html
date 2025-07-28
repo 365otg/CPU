@@ -3,7 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charles Paris Utilities</title>
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>Charles Paris Music Utilities | Charles Paris Music | Producer Tools</title>
+    <meta name="description" content="The official Charles Paris Utilities website, featuring web-based applications and tools for music producers. Discover Charles Paris Music apps, including audio tools, image tools, creative tools, and guides. Optimized for Google My Business and AI discovery.">
+    <meta name="keywords" content="Charles Paris Utilities, Charles Paris Music, Brother OTG, 365 OTG, Over Time Grind, music producer tools, web apps for producers, audio tools, image tools, creative tools, Akai MPC Guide, SP-404 MK2 Guide, Yamaha SeqTrak, Drum App, Audio Trimmer, Album Art Cropper, MIDI Tools, Google My Business, AI discovery">
+    <meta name="author" content="Charles Paris">
+    <link rel="canonical" href="https://365otg.github.io/CPU/"> <!-- Updated with your live URL -->
+
+    <!-- Open Graph / Social Media Sharing Meta Tags (for Facebook, LinkedIn, etc.) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Charles Paris Music Utilities - Music Production Tools">
+    <meta property="og:description" content="Official Charles Paris Utilities site: Free web apps for music producers, including audio, image, and creative tools from Charles Paris Music.">
+    <meta property="og:url" content="https://365otg.github.io/CPU/"> <!-- Updated with your live URL -->
+    <meta property="og:image" content="https://github.com/365otg/365CP/blob/main/Charles_Paris_bio.jpg?raw=true"> <!-- Use your actual bio image for consistency -->
+    <meta property="og:image:alt" content="Charles Paris Utilities Logo/Banner - Producer Tools">
+    <meta property="og:site_name" content="Charles Paris Music Utilities">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@365CharlesParis"> <!-- Replace with your actual Twitter handle if different -->
+    <meta name="twitter:creator" content="@365CharlesParis"> <!-- Replace with your actual Twitter handle if different -->
+    <meta name="twitter:title" content="Charles Paris Music Utilities - Producer Tools">
+    <meta name="twitter:description" content="Free web apps for music producers by Charles Paris Music: audio, image, and creative tools.">
+    <meta name="twitter:image" content="https://github.com/365otg/365CP/blob/main/Charles_Paris_bio.jpg?raw=true"> <!-- Use your actual bio image for consistency -->
+    <meta name="twitter:image:alt" content="Charles Paris Utilities Logo/Banner - Producer Tools">
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons CDN -->
@@ -43,7 +68,7 @@
     <!-- Header Section -->
     <header class="w-full max-w-4xl mb-8 text-center">
         <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 drop-shadow-lg">
-            Charles Paris Utilities
+            Charles Paris Music Utilities
         </h1>
         <p class="text-lg sm:text-xl opacity-80 mb-6">
             Charles Paris Music Apps & Utilities
@@ -195,10 +220,10 @@
                     { id: 21, name: 'Quote Maker', url: 'https://365otg.github.io/OTGQuotes/', icon: 'Tool', description: 'Create and customize inspiring quotes with this handy tool.' },
                     { id: 22, name: 'Producer Tools', url: 'https://365otg.github.io/ProducerTools/', icon: 'Package', description: 'A collection of essential tools and resources for music producers.' },
                     { id: 23, name: 'CPU Knife', url: 'https://365otg.github.io/CPUKnife/', icon: 'Settings', description: 'A utility for optimizing CPU performance and managing processes.' },
-                    { id: 24, name: 'Metronome', url: '#', icon: 'Play', description: 'A simple and accurate metronome to keep your timing perfect.' },
-                    { id: 25, name: 'Chord Explorer', url: '#', icon: 'Music', description: 'Discover and visualize various chords and scales.' },
-                    { id: 26, name: 'Sample Organizer', url: '#', icon: 'Package', description: 'Keep your audio samples neatly categorized and easily accessible.' },
-                    { id: 27, name: 'DAW Shortcuts Guide', url: '#', icon: 'Terminal', description: 'Quick reference for keyboard shortcuts in popular Digital Audio Workstations.' },
+                    { id: 24, name: 'Metronome', url: 'https://365otg.github.io/metronome/', icon: 'Play', description: 'A simple and accurate metronome to keep your timing perfect.' },
+                    { id: 25, name: 'Chord Explorer', url: 'https://365otg.github.io/ChordExplorer/', icon: 'Music', description: 'Discover and visualize various chords and scales.' },
+                    { id: 26, name: 'Sample Organizer', url: 'https://365otg.github.io/SampleOrganizer/', icon: 'Package', description: 'Keep your audio samples neatly categorized and easily accessible.' },
+                    { id: 28, name: 'Charles Paris Music', url: 'https://365otg.github.io/CharlesParisMusic/', icon: 'Music', description: 'The official website for Charles Paris Music, featuring releases and more.' }, // Added new app
                 ];
             }
         };
@@ -264,14 +289,18 @@
                 // Render app description
                 const descriptionItem = document.createElement('li');
                 descriptionItem.className = 'bg-white bg-opacity-5 p-4 rounded-lg border border-white border-opacity-10 shadow-md flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4';
+                
+                // Make the entire description item a clickable link
                 descriptionItem.innerHTML = `
-                    <div class="flex-shrink-0 text-red-300 text-3xl">
-                        <span data-lucide="${app.icon}" size="32"></span>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-red-200">Charles Paris ${app.name}</h3>
-                        <p class="text-sm opacity-80">${app.description || 'No description available.'}</p>
-                    </div>
+                    <a href="${app.url}" target="_blank" rel="noopener noreferrer" class="flex items-start sm:items-center w-full space-x-4 no-underline text-white hover:text-red-200 transition-colors duration-200">
+                        <div class="flex-shrink-0 text-red-300 text-3xl">
+                            <span data-lucide="${app.icon}" size="32"></span>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-red-200">Charles Paris ${app.name}</h3>
+                            <p class="text-sm opacity-80">${app.description || 'No description available.'}</p>
+                        </div>
+                    </a>
                 `;
                 appDescriptionsList.appendChild(descriptionItem);
             });
